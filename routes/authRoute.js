@@ -1,18 +1,18 @@
 import express from "express";
-import { forgotPasswordController, loginController, registerController, testController } from "../controllers/authController.js"
-import { isAdmin, requireSignIn } from "../middlewares/authMiddleware.js";
+
+import { requireSignIn, isAdmin } from "../middlewares/authMiddleware.js";
+import { forgotPasswordController, loginController, registerController } from "../controllers/authController.js";
+
 const router = express.Router();
 
-router.post("/register",registerController)
+// Authentication Routes
+router.post("/register", registerController);
+router.post("/login", loginController);
+router.post("/forgot-password", forgotPasswordController);
 
-router.post("/login",loginController)
+// Admin Protected Route Example
+router.get("/admin", requireSignIn, isAdmin, (req, res) => {
+  res.send({ success: true, message: "Welcome Admin!" });
+});
 
-router.post('/forgot-password',forgotPasswordController);
-
-router.get("/test",requireSignIn,isAdmin, testController);
-
-router.get("/user-auth",requireSignIn, (req,res) => {
-    res.status(200).send({ok: true});
-})
-
-export default router
+export default router;
