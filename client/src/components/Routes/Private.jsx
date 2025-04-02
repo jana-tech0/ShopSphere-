@@ -1,33 +1,24 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../../context/auth";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import axios from "axios";
+import Spinner from "../Spinner";
 
 export default function PrivateRoute() {
   const [ok, setOk] = useState(false);
-  const [auth] = useAuth(); // No need to modify auth here
-  const navigate = useNavigate();
+  const [auth, setAuth] = useAuth();
 
   useEffect(() => {
     const authCheck = async () => {
-      try {
-        const res = await axios.post("http://localhost:8080/api/v1/auth/user-auth");
-        if (res.data.ok) {
-          setOk(true);
-        } else {
-          navigate("/login"); // Redirect to login if authentication fails
-        }
-      } catch (error) {
-        navigate("/login"); // Redirect if API fails
+      const res = await axios.get("/api/v1/auth/user-auth");
+      if (res.data.ok) {
+        setOk(true);
+      } else {
+        setOk(false);
       }
     };
+    if (auth?.token) authCheck();
+  }, [auth?.token]);
 
-    if (auth?.token) {
-      authCheck();
-    } else {
-      navigate("/login");
-    }
-  }, [auth?.token, navigate]);
-
-  return ok ? <Outlet /> : null;
+  return ok ? <Outlet /> : <Spinner />;
 }

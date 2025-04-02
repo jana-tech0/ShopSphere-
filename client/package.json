@@ -12,6 +12,7 @@
     "start": "vite"
   },
   "dependencies": {
+    "antd": "^5.24.6",
     "axios": "^1.8.4",
     "bootstrap": "^5.3.3",
     "cors": "^2.8.5",

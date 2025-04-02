@@ -5,14 +5,20 @@ import { forgotPasswordController, loginController, registerController } from ".
 
 const router = express.Router();
 
-// Authentication Routes
+
 router.post("/register", registerController);
 router.post("/login", loginController);
 router.post("/forgot-password", forgotPasswordController);
 
-// Admin Protected Route Example
-router.get("/admin", requireSignIn, isAdmin, (req, res) => {
-  res.send({ success: true, message: "Welcome Admin!" });
+router.get("/test",requireSignIn, isAdmin, testController);
+
+
+router.get("/user-auth", requireSignIn, (req, res) => {
+  res.send(200).send({ok: true})
+});
+
+router.get("/admin-auth", requireSignIn, isAdmin, (req, res) => {
+  res.send(200).send({ok: true})
 });
 
 export default router;
