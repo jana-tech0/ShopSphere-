@@ -27,7 +27,7 @@ const Register = () => {
       });
       if (res && res.data.success) {
         toast.success(res.data && res.data.message);
-        navigate("/login");
+        navigate('/login')
       } else {
         toast.error(res.data.message);
       }
@@ -48,7 +48,7 @@ const Register = () => {
               value={name}
               onChange={(e) => setName(e.target.value)}
               className="form-control"
-              id="exampleInputEmail1"
+              id="exampleInputEmaildf1"
               placeholder="Enter Your Name"
               required
               autoFocus
@@ -60,7 +60,7 @@ const Register = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="form-control"
-              id="exampleInputEmail1"
+              id="exampleInputEmadfil1"
               placeholder="Enter Your Email "
               required
             />
@@ -93,7 +93,7 @@ const Register = () => {
               value={address}
               onChange={(e) => setAddress(e.target.value)}
               className="form-control"
-              id="exampleInputEmail1"
+              id="exampleInputEfdmail1"
               placeholder="Enter Your Address"
               required
             />
@@ -104,7 +104,7 @@ const Register = () => {
               value={answer}
               onChange={(e) => setAnswer(e.target.value)}
               className="form-control"
-              id="exampleInputEmail1"
+              id="exampleInputEmfdail1"
               placeholder="What is Your Favorite sports"
               required
             />
